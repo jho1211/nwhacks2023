@@ -133,15 +133,9 @@ function expand_card(profile, myTopics){
     firstRow.innerHTML = `
     <div class="mega-card-bio-div"><div class="mega-card-bio-name">${profile["name"]}</div>
     <div class="mega-card-bio-dept">Department: ${profile["department"]}</div></div>
-    <div class="profilePicDiv"></div>
+    <div class="profilePicDiv" id="profilePicDiv"></div>
 
     <button class="close-mega-btn" onclick="deflate_card()">X</button>`
-
-    if ("pfp" in Object.keys(profile) && profile["pfp"] !== ""){
-        var image = new Image();
-        image.src = `${profile["pfp"]}`;
-        document.getElementById("profilePicDiv").appendChild(image);
-    }
 
     var topicRow = document.createElement("div");
     topicRow.classList.add("mega-card-topic-div");
@@ -164,6 +158,15 @@ function expand_card(profile, myTopics){
     megaCardDiv.appendChild(megaCard);
 
     document.body.appendChild(megaCardDiv);
+
+    console.log(profile);
+    if (profile.hasOwnProperty("pfp") && profile["pfp"] !== ""){
+        var image = new Image();
+        image.src = `data:image/png;base64,${profile["pfp"]}`;
+        image.style.width = "250px";
+        image.style.height = "100px";
+        document.getElementById("profilePicDiv").appendChild(image);
+    }
 }
 
 function deflate_card(){
