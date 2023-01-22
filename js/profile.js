@@ -21,7 +21,6 @@ async function auth_user(){
                 body: JSON.stringify(data)})
             
             const myProfile = await response.json();
-            console.log(myProfile);
 
             inputs = document.querySelectorAll("input");
             inputs[0].value = myProfile["name"]
@@ -36,14 +35,16 @@ async function auth_user(){
 
             $('#topics').select2()
 
-            topicSelect = $("#topics")
-            console.log(topicSelect[0]);
-
             return;
         }
         else{
             // If the user exists already and hasn't created a profile yet, then add them to data.json
             page_title.innerHTML = "Create Profile";
+
+            await add_topic_options("Biochemistry");
+
+            $('#topics').select2()
+            
             return;
         }
     }
@@ -121,7 +122,7 @@ async function populate_select(dept){
 
     await add_topic_options(dept)
     
-    const converted = $('#topics').select2();
+    $('#topics').select2();
 
     return;
 }
@@ -141,6 +142,7 @@ async function add_topic_options(dept){
 
             topicSelect.add(newOption);
         }
+
     }
     else{
         console.log("There are no topics for this department.");
@@ -158,8 +160,8 @@ function clear_options(){
     }
 }
 
-auth_user();
 populate_depts();
+auth_user();
 
 document.getElementById("profile-form").onsubmit = async (e) => {
     e.preventDefault();

@@ -220,6 +220,7 @@ body {
 
     position: relative;
     width: 1080px;
+    height: 500px;
 
     background: #E1B6E8;
     border-radius: 20px;
@@ -367,4 +368,23 @@ body {
     cursor: pointer;
     transform: scale(1.1);
     background-color: rgba(255, 255, 255, 0.4);
+}
+
+.additional-text{
+    color: black;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.additional-title{
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.mega-info-div{
+    position: absolute;
+    bottom: 40%;
+    width: 300px;
+    margin-left: 15px;
 }

@@ -137,9 +137,14 @@ function expand_card(profile, myTopics){
     <a class="mega-card-link" href=${profile["website"]}>Website</a>
     <a class="mega-card-link" href="mailto:${profile["email"]}">Email</a></div>`
 
+    var additionalDiv = document.createElement("div");
+    additionalDiv.classList.add("mega-info-div")
+    additionalDiv.innerHTML = `<h1 class="additional-title">Additional Information:</h1><div class="additional-text">${profile["extra"]}</div>`
+
     megaCard.appendChild(firstRow);
-    megaCard.appendChild(topicRow);
     topicRow.appendChild(btmRight);
+    megaCard.appendChild(topicRow);
+    megaCard.appendChild(additionalDiv);
     megaCardDiv.appendChild(megaCard);
 
     document.body.appendChild(megaCardDiv);
