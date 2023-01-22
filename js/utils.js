@@ -15,16 +15,11 @@ function getCookie(cname) {
   }
 
   function setCookie(uname, hasProfile, userType) {
-    if (hasProfile == ""){
-        document.cookie = "username=" + uname;
-        document.cookie = "userType=" + userType;
-    }
-    else {
-        document.cookie = "username=" + uname;
-        document.cookie = "hasProfile=true";
-        document.cookie = "userType=" + userType;
-    }
-    console.log(document.cookie)
+    console.log(userType);
+    document.cookie = "username=" + uname;
+    document.cookie = "hasProfile=" + hasProfile;
+    document.cookie = "userType=" + userType;
+
     return;
   }
 

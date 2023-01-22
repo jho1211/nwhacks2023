@@ -1,7 +1,8 @@
 async function login(){
     email = document.getElementById("email").value;
     pw = document.getElementById("password").value;
-    data = {"email": email, "password": pw}
+    data = {"username": email, "password": pw}
+    const url = "https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/login"
 
     const response = await fetch(url, {
         method: "POST",
@@ -12,15 +13,17 @@ async function login(){
 
     if (response.ok){
         // the user exists and password is correct
-        d = response.json();
+        d = await response.json();
         alert("You have been authenticated, welcome!");
-        setCookie(email, d["userType"], d["hasProfile"])
+        
+        setCookie(email, d["hasProfile"], d["userType"])
+        
 
         if (d["hasProfile"] !== ""){
-            location.replace("card.html");
+            //location.replace("card.html");
         }
         else{
-            location.replace("profile.html");
+            //location.replace("profile.html");
         }
     }
     else if (response.status == 420){
