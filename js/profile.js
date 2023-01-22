@@ -1,4 +1,4 @@
-$(function () { $('#topics').selectize({sortField: "text"}) });
+$(function () { $('#topics').select2({theme: "classic"}) });
 
 function auth_user(){
     page_title = document.getElementById("profileTitle")
@@ -27,21 +27,18 @@ async function submit_user(){
     uname = getCookie("username");
     profile = getCookie("hasProfile");
     inputs = document.querySelectorAll("input")
-    console.log()
+    console.log(inputs)
 
-    data = {"name": inputs[0], "website": inputs[1], department: $('#department').val(), "email": inputs[3], "topics": $('#topics').val(), "extra": inputs[5]}
+    data = {"username": uname, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
     console.log(data);
-
-    const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit", {
-        method: "POST",
-        mode: 'cors',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    })
 
     if (uname !== "" && profile !== ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit/" + uname)
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit", {
+        method: "POST",
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
 
         // if response status is good, then set the cookie and redirect them to the search
         if (response.ok){
@@ -63,9 +60,52 @@ async function submit_user(){
     }
 }
 
+function populate_depts(){
+    departments = Object.keys(fetch("data/departments.json"));
+    departments.sort();
+
+    deptSelect = document.getElementById("department");
+
+    for (var i in departments){
+        var newOption = document.createElement("option");
+        dept = departments[i];
+
+        newOption.value = dept;
+        newOption.innerHTML = dept;
+
+        deptSelect.add(newOption);
+    }
+}
+
+function populate_select(dept){
+    topics = fetch("data/departments.json")[dept];
+
+    for (var i in topics){
+        var newOption = document.createElement("option");
+        topic = topics[i]
+
+        newOption.value = topic;
+        newOption.innerHTML = topic;
+        
+        topicSelect.add(newOption);
+    }
+
+    return;
+}
+
+function clear_options(){
+    topicSelect = $('topics').selectize
+    topicSelect.removeOption("test1");
+}
+
 auth_user();
+populate_depts();
 
 document.getElementById("profile-form").onsubmit = async (e) => {
     e.preventDefault();
     return await submit_user();
 } 
+
+document.getElementById("department").onchange = function (e) {
+    populate_select(e.target.value);
+}
