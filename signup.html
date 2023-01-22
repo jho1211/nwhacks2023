@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
     <title>GradLink Signup Portal</title>
-    <script src="js/signup.js"></script>
     <link rel="stylesheet" href="css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form>
+    <form id="signup-form">
         <div class="signup-panel">
             <h1 class="signup-title">Sign Up For a Gradlink Account</h1>
             <div class="signup-item">
                 <h3 class="signup-item-text">Email (must be a UBC-affiliated email):</h1>
-                <input type="email" id="email" placeholder="nwhacks_student@student.ubc.ca" class="signup-input">
+                <input type="email" id="email" placeholder="nwhacks_student@student.ubc.ca" class="signup-input" required>
             </div>
             <div class="signup-item">
                 <h3 class="signup-item-text">Password:</h1>
-                <input type="password" id="password" class="signup-input">
+                <input type="password" id="password" class="signup-input" required>
             </div>
             <div class="signup-item">
                 <h3 class="signup-item-text">Confirm Password:</h1>
-                <input type="password" id="confirm-password" class="signup-input">
+                <input type="password" id="confirm-password" class="signup-input" required>
             </div>
-            <button type="button" class="submit-signup-btn">Sign Up</button>
+            <button type="submit" class="signup-btn" id="signupBtn">Sign Up</button>
         </div>
     </form>
+    <script src="js/signup.js"></script>
 </body>
 </html>
