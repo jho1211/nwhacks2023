@@ -1,0 +1,54 @@
+body{
+    background-color: #AB14C3;
+    color: white;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cap{
+    box-sizing: border-box;
+    width: 193px;
+    height: 181px;
+
+
+    background: url(2.png);
+    border: none;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.gradlink{
+    width: 220px;
+    height: 54px;
+
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 60px;
+
+    /* or 125% */
+
+    /* White */
+    color: #FFFFFE;
+}
+
+.text {
+    width: 405px;
+    height: 22px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+
+    /* or 125% */
+
+    /* White */
+    color: #FFFFFE;
+}
