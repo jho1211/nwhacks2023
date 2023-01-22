@@ -6,8 +6,8 @@ function auth_user(){
     profile = getCookie("hasProfile");
 
     if (uname == ""){
-        alert("You need to create an account before visiting this page.")
-        //location.replace("index.html")
+        alert("You need to create a new account or sign-in before visiting this page.")
+        location.replace("index.html")
         return;
     }
     else{
@@ -26,15 +26,14 @@ function auth_user(){
 async function submit_user(){
     uname = getCookie("username");
     profile = getCookie("hasProfile");
-    inputs = document.querySelectorAll("input")
-    console.log(inputs)
+    type = getCookie("userType");
 
     data = {"username": uname, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
     console.log(data);
 
-    if (uname !== "" && profile !== ""){
+    if (uname !== "" && profile !== "" && type != ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit", {
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit/" + type, {
         method: "POST",
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -42,14 +41,12 @@ async function submit_user(){
 
         // if response status is good, then set the cookie and redirect them to the search
         if (response.ok){
-
+            setCookie(uname, "true", type)
         }
-
-        setCookie(uname, "true")
 
         // if response status is bad, then alert
     }
-    else{
+    else if (type !== ""){
         const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add/" + uname)
 
         // if response status is good, then set the cookie and redirect them to the search
@@ -57,6 +54,10 @@ async function submit_user(){
         setCookie(uname, "true")
 
         // if response status is bad, then alert
+    }
+    else{
+        alert("An unknown error occurred, please try again later.");
+        return false;
     }
 }
 

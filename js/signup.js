@@ -4,9 +4,6 @@ async function signup(){
     confirm_pw_input = document.getElementById("confirm-password");
     data = {"email": email_input.value, "password": pw_input.value}
 
-    console.log(pw_input.value);
-    console.log(confirm_pw_input.value);
-
     // Add some validation here
     if (pw_input.value !== confirm_pw_input.value) {
         alert("Passwords do not match.")
@@ -27,10 +24,9 @@ async function signup(){
     }
     else if (response.ok){
         // the email doesn't exist and the password matches
-        setCookie(email_input.value, "true");
-        alert("You have been authenticated, welcome!")
-        console.log(document.cookie)
-        //location.replace("profile.html")
+        setCookie(email_input.value, "", "");
+        alert("You have successfully created an account, welcome!")
+        location.replace("profile.html")
     }
     else{
         alert("Error has occurred, please try again later.")
