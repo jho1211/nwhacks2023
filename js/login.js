@@ -10,7 +10,20 @@ async function login(){
         body: JSON.stringify(data)
     })
 
-    if (response.status == 420){
+    if (response.ok){
+        // the user exists and password is correct
+        d = response.json();
+        alert("You have been authenticated, welcome!");
+        setCookie(email, d["userType"], d["hasProfile"])
+
+        if (d["hasProfile"] !== ""){
+            location.replace("card.html");
+        }
+        else{
+            location.replace("profile.html");
+        }
+    }
+    else if (response.status == 420){
         // the password is incorrect
         alert("Password is incorrect.");
     }
@@ -18,12 +31,24 @@ async function login(){
         // the user doesn't exist
         alert("The email doesn't exist.");
     }
-    else if (response.status == 1337){
-        // the user exists and password is correct
-        alert("You have been authenticated, welcome!")
+    else{
+        alert("An error occurred, please try logging in again later.");
     }
 }
 
 document.getElementById("login-btn").onclick = async () => {
     await login();
 }
+
+function autoLogin(){
+    if (getCookie("username") !== "" && getCookie("hasProfile") !== ""){
+        location.replace("card.html");
+    }
+    else if (getCookie("username") !== "" && getCookie("hasProfile") == ""){
+        location.replace("profile.html");
+    }
+    
+    return;
+}
+
+autoLogin();

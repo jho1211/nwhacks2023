@@ -11,8 +11,9 @@ function auth_user(){
         return;
     }
     else{
-        if (profile == ""){
+        if (profile !== ""){
             page_title.innerHTML = "Edit Profile";
+            // fetch all of the user's profile
             return;
         }
         else{
