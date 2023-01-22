@@ -25,8 +25,8 @@ async function auth_user(){
             inputs = document.querySelectorAll("input");
             inputs[0].value = myProfile["name"]
             inputs[1].value = myProfile["website"]
-            inputs[2].value = myProfile["email"]
-            inputs[3].value = myProfile["extra"]
+            inputs[3].value = myProfile["email"]
+            inputs[4].value = myProfile["extra"]
 
             deptSelect = $("#department")
             deptSelect[0].value = myProfile["department"];
@@ -63,8 +63,9 @@ async function submit_user(){
     type = document.getElementById("userType").value;
 
     inputs = document.querySelectorAll("input");
+    img = imgToBase64();
 
-    data = {"username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[2].value, "topics": $('#topics').val(), "extra": inputs[3].value}
+    data = {"pfp": img, "username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
 
     if (uname !== "" && profile !== ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
@@ -103,6 +104,57 @@ async function submit_user(){
         alert("An unknown error occurred, please try again later.");
         return false;
     }
+}
+
+function imgToBase64() {
+
+    var pfp = document.getElementById("profilePicInput").files;
+    if (pfp.length == 1) {
+      var img = pfp[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+
+        console.log(newImage.outerHTML)
+        console.log("Converted to base64");
+        return newImage.outerHTML;
+      }
+      fileReader.readAsDataURL(img);
+    }
+    else{
+        return false;
+    }
+}
+
+async function submit_photo(){
+    sendImg = $('#profilePicInput')[0].files[0];
+
+    if (sendImg !== null){
+        console.log("No image uploaded.");
+        return false;;
+    }
+    else{
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add/", {
+            method: "POST",
+            mode: 'cors',
+            headers: {'Content-Type': 'multipart/form-data'},
+            body: sendImg
+        })
+
+        if (response.ok){
+            console.log("Image uploaded successfully.");
+            return true;
+        }
+        else{
+            alert("There was an error in uploading the image, please try again.");
+            return false;
+        }
+    }   
 }
 
 async function populate_depts(){
