@@ -1,0 +1,15 @@
+{
+    "Biochemistry" : ["Enzymology", "Membrane Biochemistry"],
+    "Chemistry" : ["Inorganic Chemistry", "Organometallic Chemistry", "Mass Spectrometry", "Thermodynamics"],
+    "Classical Studies" : ["Classical Architecture", "Classical Literature"], 
+    "Music Studies" : ["Music History", "Diatonic Harmony"],
+    "Physics" : ["Aerodynamics", "Hydrodynamics", "Astrophysics", "Biophysics", "Electromagnetics", "Quantum Physics", "Classical Dynamics", "Optics"],
+    "Electrical Engineering" : ["Electromagnetics", "Power Electronics", "Robotics", "VLSI", "CMOS", "Signal Processing", "Semiconductors", "Communications", "Controls", "Electromechanics"],
+    "Computer Science" : ["Optimization", "Deep Learning", "Computer Vision", "Algorithms", "Natural Language Processing", "Machine Learning", "Operating Systems", "Cybersecurity", "Computer Hardware", "Computer Graphics", "Human-Computer Interaction"],
+    "Asian Studies" : ["Premodern Japan", "Taoism", "Tibetan Buddhism"],
+    "Biology" : ["Botany", "Entomology", "Genetics", "Zoology"],
+    "Microbiology and Immunology" : ["Bioinformatics", "Virology", "Metabolomics"],
+    "Psychology" : ["Human Cognition", "Prosocial Behaviour"], 
+    "Statistics" : ["Bayesian Inference"],
+    "Mathematics" : ["Probability", "Convex Optimization", "Number Theory", "Group Theory", "Graph Theory", "Complex Analysis", "Differential Equations"]
+}
