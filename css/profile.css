@@ -65,4 +65,16 @@ body {
 .save-btn {
     width: 150px;
     height: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: white;
+}
+
+.save-btn:hover{
+    background: white;
+    color: #AB14C3;
+    cursor: pointer;
 }

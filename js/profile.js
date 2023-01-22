@@ -1,4 +1,4 @@
-$(function () { $('#topics').selectize({sortField: "text"}) });
+$(function () { $('#topics').select2({theme: "classic"}) });
 
 function auth_user(){
     page_title = document.getElementById("profileTitle")
@@ -6,8 +6,8 @@ function auth_user(){
     profile = getCookie("hasProfile");
 
     if (uname == ""){
-        alert("You need to create an account before visiting this page.")
-        //location.replace("index.html")
+        alert("You need to create a new account or sign-in before visiting this page.")
+        location.replace("index.html")
         return;
     }
     else{
@@ -26,31 +26,87 @@ function auth_user(){
 async function submit_user(){
     uname = getCookie("username");
     profile = getCookie("hasProfile");
+    type = getCookie("userType");
 
-    if (uname !== "" && profile !== ""){
+    data = {"username": uname, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
+    console.log(data);
+
+    if (uname !== "" && profile !== "" && type != ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit_" + uname)
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit/" + type, {
+        method: "POST",
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+
+        // if response status is good, then set the cookie and redirect them to the search
+        if (response.ok){
+            setCookie(uname, "true", type)
+        }
+
+        // if response status is bad, then alert
+    }
+    else if (type !== ""){
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add/" + uname)
 
         // if response status is good, then set the cookie and redirect them to the search
 
-        document.cookie = "username=" + uname + ";" + "hasProfile=true;"
+        setCookie(uname, "true")
 
         // if response status is bad, then alert
     }
     else{
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add_" + uname)
-
-        // if response status is good, then set the cookie and redirect them to the search
-
-        document.cookie = "username=" + uname + ";" + "hasProfile=true;"
-
-        // if response status is bad, then alert
+        alert("An unknown error occurred, please try again later.");
+        return false;
     }
 }
 
-auth_user();
+function populate_depts(){
+    departments = Object.keys(fetch("data/departments.json"));
+    departments.sort();
 
-document.getElementById("saveBtn").onsubmit = async (e) => {
+    deptSelect = document.getElementById("department");
+
+    for (var i in departments){
+        var newOption = document.createElement("option");
+        dept = departments[i];
+
+        newOption.value = dept;
+        newOption.innerHTML = dept;
+
+        deptSelect.add(newOption);
+    }
+}
+
+function populate_select(dept){
+    topics = fetch("data/departments.json")[dept];
+
+    for (var i in topics){
+        var newOption = document.createElement("option");
+        topic = topics[i]
+
+        newOption.value = topic;
+        newOption.innerHTML = topic;
+        
+        topicSelect.add(newOption);
+    }
+
+    return;
+}
+
+function clear_options(){
+    topicSelect = $('topics').selectize
+    topicSelect.removeOption("test1");
+}
+
+auth_user();
+populate_depts();
+
+document.getElementById("profile-form").onsubmit = async (e) => {
     e.preventDefault();
     return await submit_user();
 } 
+
+document.getElementById("department").onchange = function (e) {
+    populate_select(e.target.value);
+}

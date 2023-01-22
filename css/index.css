@@ -86,11 +86,12 @@ body{
 .loginBtn:hover{
     color: #AB14C3;
     background-color: white;
+    cursor: pointer;
 }
 
 .signupBtn:hover{
     background-color: rgba(0, 0, 0, 0);
     border-color: white;
-    border;
     color: white;
+    cursor: pointer;
 }

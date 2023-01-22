@@ -14,14 +14,15 @@ function getCookie(cname) {
     return "";
   }
 
-  function setCookie(uname, hasProfile) {
+  function setCookie(uname, hasProfile, userType) {
     if (hasProfile == ""){
         document.cookie = "username=" + uname;
-        document.cookie = "hasProfile=false";
+        document.cookie = "userType=" + userType;
     }
     else {
         document.cookie = "username=" + uname;
         document.cookie = "hasProfile=true";
+        document.cookie = "userType=" + userType;
     }
     console.log(document.cookie)
     return;
