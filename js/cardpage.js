@@ -31,7 +31,43 @@ async function fetch_pis(){
         body: JSON.stringify(data)})
     const piProfiles = await response.json();
 
-    console.log(piProfiles);
+    for (var pip in piProfiles){
+        generate_profile_card(piProfiles[pip]);
+    }
+
+    return;
+}
+
+// Generate a card based on the profile given and adds it to the cards container
+function generate_profile_card(profile){
+    var newDiv = document.createElement("div");
+    newDiv.classList.add("card");
+    topHalf = document.createElement("div");
+    topHalf.classList.add("text-half");
+    topHalf.innerHTML = `<div class="name">
+    ${profile["name"]}</div>
+<div class="department">
+    ${profile["department"]}</div>`
+    
+    topicContainer = document.createElement("div");
+    topicContainer.classList.add("topic-container");
+    topicContainer = generate_topic_cards(topicContainer, profile["topics"]);
+    
+    newDiv.appendChild(topHalf);
+    newDiv.appendChild(topicContainer);
+    document.getElementById("cards").appendChild(newDiv);
+}
+
+function generate_topic_cards(tc, topics){
+    for (var i in topics){
+        newTopicDiv = document.createElement("div")
+        newTopicDiv.classList.add("topic");
+        newTopicDiv.classList.add("topic-match");
+        newTopicDiv.innerHTML = `<div class="topic-text">${topics[i]}</div></div>`
+
+        tc.appendChild(newTopicDiv);
+    }
+    return tc;
 }
 
 auth_user();
