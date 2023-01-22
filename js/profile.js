@@ -1,9 +1,10 @@
 $(function () { $('#topics').select2() });
 
-function auth_user(){
+async function auth_user(){
     page_title = document.getElementById("profileTitle")
     uname = getCookie("username");
     profile = getCookie("hasProfile");
+    type = getCookie("userType");
 
     if (uname == ""){
         alert("You need to create a new account or sign-in before visiting this page.")
@@ -14,6 +15,16 @@ function auth_user(){
         if (profile !== ""){
             page_title.innerHTML = "Edit Profile";
             // fetch all of the user's profile
+            data = {"username": uname, "userType": type}
+            const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/get/", {
+                method: "POST",
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)})
+            
+            const myProfile = await response.json();
+            console.log(myProfile);
+
             return;
         }
         else{
@@ -30,10 +41,8 @@ async function submit_user(){
     type = document.getElementById("userType").value;
 
     inputs = document.querySelectorAll("input");
-    console.log(inputs);
 
     data = {"username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[2].value, "topics": $('#topics').val(), "extra": inputs[3].value}
-    console.log(data);
 
     if (uname !== "" && profile !== ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
