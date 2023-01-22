@@ -63,9 +63,15 @@ async function submit_user(){
     type = document.getElementById("userType").value;
 
     inputs = document.querySelectorAll("input");
-    var pfpLink = $('#imgBase64')[0].innerHTML.split(',')[1]
 
-    data = {"pfp": pfpLink, "username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
+    var pfpLink = $('#imgBase64')
+
+    if (pfpLink[0] !== undefined){
+        data = {"pfp": pfpLink[0].innerHTML.split(',')[1], "username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
+    }
+    else {
+        data = {"username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
+    }
 
     if (uname !== "" && profile !== ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
