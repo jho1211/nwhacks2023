@@ -128,7 +128,7 @@ function expand_card(profile, myTopics){
 
     // generate megacard topics div and 
     var firstRow = document.createElement("div");
-    firstRow.classList.add("mega-card-to-div");
+    firstRow.classList.add("mega-card-top-div");
 
     firstRow.innerHTML = `
     <div class="mega-card-bio-div"><div class="mega-card-bio-name">${profile["name"]}</div>

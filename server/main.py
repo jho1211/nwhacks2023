@@ -2,6 +2,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS, cross_origin
 from threading import Thread
 import json
+import base64
 
 app = Flask('')
 CORS(app)
@@ -41,7 +42,9 @@ def filter_by_interests(d, interests):
   for pi in d:
     for interest in interests:
       if interest in d[pi]["topics"]:
-        new_d[pi] = d[pi]
+        new_d[pi] = d[pi].copy()
+        if "pfp" in d[pi]:
+          new_d[pi]["pfp"] = encode_img(d[pi]["pfp"])
         break
 
   return new_d
@@ -75,6 +78,11 @@ def add_profile():
 
   if type in profiles:
     profiles[type][uname] = data
+
+    if 'pfp' in data:
+      img = save_image(data["pfp"], uname)
+      profiles[type][uname]["pfp"] = img
+      
     save_json(profiles, "user_profiles.json")
     return "added"
   else:
@@ -91,6 +99,9 @@ def edit_user():
   if type in profiles:
     if uname in profiles[type]:
       profiles[type][uname] = data
+      if 'pfp' in data:
+        img = save_image(data["pfp"], uname)
+        profiles[type][uname]["pfp"] = img
       save_json(profiles, "user_profiles.json")
       return "good!"
     else:
@@ -153,6 +164,22 @@ def create_user():
     users[uname] = {"password": hash(data["password"]), "userType": ""}
     save_json(users, "users.json")
     return "We all good"
+
+def save_image(b64, uname):
+  fname = 'profiles/' + str(abs(hash(uname))) + get_file_ext(b64)
+  with open(fname, "wb") as imgfile:
+    imgfile.write(base64.b64decode(b64))
+    return fname
+
+def encode_img(fn):
+  with open(fn, "rb") as imgfile:
+    b64data = imgfile.read()
+    base64_encoded_data = base64.b64encode(b64data).decode('utf-8')
+    return base64_encoded_data
+
+def get_file_ext(b64):
+  d = {"/": ".jpg", "i": ".png"}
+  return d[b64[0]]
 
 def save_json(d, fn):
   with open(fn, "w") as outfile:
