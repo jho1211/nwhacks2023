@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Find a PI</title>
+    <link rel="stylesheet" href="css/filter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"/>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+    </script>
+
+    <script src="js/utils.js"></script>
+</head>
+<body>
+    <h1 class="menu-title" id="menuTitle">Find PIs</h1>
+    <form>
+        <div class="container">
+            <div class="menu-panel">
+                <div class="menu-item">
+                    <h3 class="menu-item-text">Department Dropdown</h3>
+                    <select name="department" id="department" class="department-select">
+                        <option value="test">Test 1</option>
+                        <option value="test2">Test 2</option>
+                    </select>
+                    <div class="checkbox">
+                        <p>Filter by department only</p>
+                        <input type="checkbox" id="filter-dept-only" name="filter-dept-only" value="filter">
+                    </div>
+                </div>
+                <div class="menu-item">
+                    
+                </div>
+                <div class="menu-item">
+                    <h3 class="menu-item-text">Research Topics:</h3>
+                    <select name="topics" id="topics" class="department-select" multiple>
+                        <option value="test">Test 1</option>
+                        <option value="test2">Test 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button type="submit" class="search-btn" id="searchBtn">Search</button>
+        </div>
+    </form>
+    <script src="js/filter.js"></script>
+</body>
+</html>

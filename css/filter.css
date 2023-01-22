@@ -1,0 +1,72 @@
+body {
+    background-color: #AB14C3;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.menu-title {
+    font-size: 50px;
+    text-align: center;
+}
+
+.menu-title{
+    font-size: 50px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin-top: 100px;
+    margin-bottom: 25px;
+}
+
+.menu-panel {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 0;
+    width: 300px;
+}
+
+.menu-item-text {
+    color: white;
+    font-size: 15px;
+    font-weight: 30px;
+    margin-bottom: 5px;
+}
+
+.checkbox {
+    display: flex;
+    flex: row;
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.department-select {
+    width: 300px;
+    height: 31px;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.filter-dept-only {
+    margin-bottom: 0px;
+}
+
+.search-btn {
+    width: 150px;
+    height: 30px;
+    align-items: center;
+}
+
+.button {
+    text-align: center;
+}

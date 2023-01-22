@@ -13,3 +13,16 @@ function getCookie(cname) {
     }
     return "";
   }
+
+  function setCookie(uname, hasProfile) {
+    if (hasProfile == ""){
+        document.cookie = "username=" + uname;
+        document.cookie = "hasProfile=false";
+    }
+    else {
+        document.cookie = "username=" + uname;
+        document.cookie = "hasProfile=true";
+    }
+    console.log(document.cookie)
+    return;
+  }

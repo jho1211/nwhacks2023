@@ -9,9 +9,7 @@ async function signup(){
 
     // Add some validation here
     if (pw_input.value !== confirm_pw_input.value) {
-        console.log("Wrong");
-        pw_input.setCustomValidity("Passwords do not match.")
-        pw_input.reportValidity();
+        alert("Passwords do not match.")
         return false;
     }
 
@@ -23,17 +21,19 @@ async function signup(){
         body: JSON.stringify(data)
     })
 
-    if (response.status == 420){
+    if (response.status == 696){
         // the password is incorrect
-        alert("Password is incorrect.");
+        alert("The email already exists, please sign-in instead.");
     }
-    else if (response.status == 666){
-        // the user doesn't exist
-        alert("The email doesn't exist.");
-    }
-    else if (response.status == 1337){
-        // the user exists and password is correct
+    else if (response.ok){
+        // the email doesn't exist and the password matches
+        setCookie(email_input.value, "true");
         alert("You have been authenticated, welcome!")
+        console.log(document.cookie)
+        //location.replace("profile.html")
+    }
+    else{
+        alert("Error has occurred, please try again later.")
     }
 }
 
