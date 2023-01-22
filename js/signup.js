@@ -25,6 +25,7 @@ async function signup(){
     if (response.status == 696){
         // the password is incorrect
         alert("The email already exists, please sign-in instead.");
+        return false;
     }
     else if (response.ok){
         // the email doesn't exist and the password matches
@@ -34,6 +35,7 @@ async function signup(){
     }
     else{
         alert("Error has occurred, please try again later.")
+        return false;
     }
 }
 

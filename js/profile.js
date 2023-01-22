@@ -35,6 +35,10 @@ async function auth_user(){
 
             $('#topics').select2()
 
+            $('#userType').val(type);
+
+            // disable choose PI
+
             return;
         }
         else{
