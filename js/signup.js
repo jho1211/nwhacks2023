@@ -1,10 +1,22 @@
-async function login(){
-    email = document.getElementById("email").value;
-    pw = document.getElementById("password").value;
-    confirm_pw = document.getElementById("confirm-pw").value;
-    data = {"email": email, "password": pw}
+async function signup(){
+    email_input = document.getElementById("email");
+    pw_input = document.getElementById("password");
+    confirm_pw_input = document.getElementById("confirm-password");
+    data = {"email": email_input.value, "password": pw_input.value}
 
-    const response = await fetch(url, {
+    console.log(pw_input.value);
+    console.log(confirm_pw_input.value);
+
+    // Add some validation here
+    if (pw_input.value !== confirm_pw_input.value) {
+        console.log("Wrong");
+        pw_input.setCustomValidity("Passwords do not match.")
+        pw_input.reportValidity();
+        return false;
+    }
+
+
+    const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/signup", {
         method: "POST",
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -25,6 +37,7 @@ async function login(){
     }
 }
 
-document.getElementById("login-btn").onclick = async () => {
-    await login();
+document.getElementById("signup-form").onsubmit = async (e) => {
+    e.preventDefault();
+    return await signup();
 }
