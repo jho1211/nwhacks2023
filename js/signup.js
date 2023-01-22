@@ -1,6 +1,7 @@
 async function login(){
     email = document.getElementById("email").value;
     pw = document.getElementById("password").value;
+    confirm_pw = document.getElementById("confirm-pw").value;
     data = {"email": email, "password": pw}
 
     const response = await fetch(url, {
