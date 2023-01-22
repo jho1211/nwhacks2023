@@ -14,7 +14,6 @@ async function login(){
     if (response.ok){
         // the user exists and password is correct
         d = await response.json();
-        alert("You have been authenticated, welcome!");
         
         setCookie(email, d["hasProfile"], d["userType"])
         
