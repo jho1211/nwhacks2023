@@ -36,6 +36,10 @@ async function fetch_pis(){
         body: JSON.stringify(data)})
     const piProfiles = await response.json();
 
+    if (Object.keys(piProfiles).length == 0){
+        alert("There were no PIs that match your research interests.")
+    }
+
     for (var pip in piProfiles["pis"]){
         generate_profile_card(piProfiles["pis"][pip], piProfiles["myTopics"]);
     }
@@ -174,9 +178,11 @@ function deflate_card(){
 auth_user();
 fetch_pis();
 
+/*
 document.getElementById("searchNavBtn").onclick = function () {
     location.href = "filter.html";
 }
+*/
 
 document.getElementById("profileNavBtn").onclick = function () {
     location.href = "profile.html";

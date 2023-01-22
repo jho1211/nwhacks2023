@@ -179,6 +179,7 @@ function become_undergrad(){
 
         $('#website').prop('required', false);
         $('#email').prop('required', false);
+        $('#resTopics')[0].innerHTML = "Research Interests";
     }
     else {
         $('#website').prop('disabled', false);
@@ -187,6 +188,7 @@ function become_undergrad(){
 
         $('#website').prop('required', true);
         $('#email').prop('required', true);
+        $('#resTopics')[0].innerHTML = "Research Topics";
     }
 }
 

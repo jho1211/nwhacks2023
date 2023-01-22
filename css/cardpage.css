@@ -15,7 +15,7 @@ body {
     position: fixed;
     top: 0;
 
-    width: 1060px;
+    width: 100%;
     height: 70px;
     background-color: #9747FF;
     display: flex;
@@ -63,7 +63,7 @@ body {
     align-items: flex-start;
     padding: 10px 10px;
     gap: 50px;
-    width: 1060px;
+    /*width: 1060px;*/
 
     margin-top: 150px;
 
