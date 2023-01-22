@@ -163,7 +163,7 @@ function expand_card(profile, myTopics){
     if (profile.hasOwnProperty("pfp") && profile["pfp"] !== ""){
         var image = new Image();
         image.src = `data:image/png;base64,${profile["pfp"]}`;
-        image.style.width = "250px";
+        image.style.width = "150px";
         image.style.height = "100px";
         document.getElementById("profilePicDiv").appendChild(image);
     }
