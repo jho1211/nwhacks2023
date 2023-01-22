@@ -78,3 +78,7 @@ body {
     color: #AB14C3;
     cursor: pointer;
 }
+
+.select2-container--default{
+    color: black;
+}

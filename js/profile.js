@@ -1,4 +1,4 @@
-$(function () { $('#topics').select2({theme: "classic"}) });
+$(function () { $('#topics').select2() });
 
 function auth_user(){
     page_title = document.getElementById("profileTitle")
@@ -74,9 +74,10 @@ async function submit_user(){
     }
 }
 
-function populate_depts(){
-    departments = Object.keys(fetch("data/departments.json"));
-    departments.sort();
+async function populate_depts(){
+    var response = await fetch("data/departments.json");
+    const resp_json = await response.json();
+    departments = Object.keys(resp_json);
 
     deptSelect = document.getElementById("department");
 
@@ -91,25 +92,42 @@ function populate_depts(){
     }
 }
 
-function populate_select(dept){
-    topics = fetch("data/departments.json")[dept];
+async function populate_select(dept){
+    $('#topics').select2('destroy');
+    clear_options();
 
-    for (var i in topics){
-        var newOption = document.createElement("option");
-        topic = topics[i]
+    topicSelect = $("#topics")[0];
 
-        newOption.value = topic;
-        newOption.innerHTML = topic;
-        
-        topicSelect.add(newOption);
+    const response = await fetch("data/departments.json");
+    topics = await response.json();
+
+    arr = []
+
+    if (topics.hasOwnProperty(dept)){
+        for (var i in topics[dept]){
+            var newOption = document.createElement("option")
+            newOption.value = topics[dept][i]
+            newOption.innerHTML = topics[dept][i]
+
+            topicSelect.add(newOption);
+        }
+
+        const converted = $('#topics').select2();
+    }
+    else{
+        console.log("There are no topics for this department.");
     }
 
     return;
 }
 
 function clear_options(){
-    topicSelect = $('topics').selectize
-    topicSelect.removeOption("test1");
+    const topicSelect = $('#topics')[0];
+    var len = topicSelect.options.length - 1;
+    
+    for (var i = len; i >= 0; i--){
+        topicSelect.remove(i);
+    }
 }
 
 auth_user();
