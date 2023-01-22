@@ -36,8 +36,8 @@ async function auth_user(){
             $('#topics').select2()
 
             $('#userType').val(type);
-
-            // disable choose PI
+            $('#userType').prop("disabled", true);
+            $('#userType').trigger("change");
 
             return;
         }
@@ -48,6 +48,9 @@ async function auth_user(){
             await add_topic_options("Biochemistry");
 
             $('#topics').select2()
+
+            $('#userType').val("undergrad");
+            $('#userType').trigger("change");
             
             return;
         }
@@ -164,6 +167,29 @@ function clear_options(){
     }
 }
 
+function become_undergrad(){
+    // If you are undergrad, then disable the website field and change topics -> interests instead
+    // Disable addtl info, disable contact email
+    userType = $('#userType').val();
+    
+    if (userType == 'undergrad'){
+        $('#website').prop('disabled', true);
+        $('#email').prop('disabled', true);
+        $('#additional-info').prop('disabled', true);
+
+        $('#website').prop('required', false);
+        $('#email').prop('required', false);
+    }
+    else {
+        $('#website').prop('disabled', false);
+        $('#email').prop('disabled', false);
+        $('#additional-info').prop('disabled', false);
+
+        $('#website').prop('required', true);
+        $('#email').prop('required', true);
+    }
+}
+
 populate_depts();
 auth_user();
 
@@ -174,4 +200,8 @@ document.getElementById("profile-form").onsubmit = async (e) => {
 
 document.getElementById("department").onchange = function (e) {
     populate_select(e.target.value);
+}
+
+document.getElementById("userType").onchange = function (e) {
+    become_undergrad();
 }
