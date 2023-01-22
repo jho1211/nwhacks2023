@@ -20,10 +20,10 @@ async function login(){
         
 
         if (d["hasProfile"] !== ""){
-            //location.replace("card.html");
+            location.replace("cardpage.html");
         }
         else{
-            //location.replace("profile.html");
+            location.replace("profile.html");
         }
     }
     else if (response.status == 420){
@@ -45,7 +45,7 @@ document.getElementById("login-btn").onclick = async () => {
 
 function autoLogin(){
     if (getCookie("username") !== "" && getCookie("hasProfile") !== ""){
-        location.replace("card.html");
+        location.replace("cardpage.html");
     }
     else if (getCookie("username") !== "" && getCookie("hasProfile") == ""){
         location.replace("profile.html");

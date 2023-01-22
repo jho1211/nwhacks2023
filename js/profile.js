@@ -46,7 +46,7 @@ async function submit_user(){
         // if response status is good, then set the cookie and redirect them to the search
         if (response.ok){
             setCookie(uname, "true", type)
-            location.replace("card.html");
+            location.replace("cardpage.html");
         }
         else{
             alert("There was an error editing your profile, please try again later.")
@@ -62,7 +62,7 @@ async function submit_user(){
         // if response status is good, then set the cookie and redirect them to the search
         if (response.ok){
             setCookie(uname, "true", type)
-            location.replace("card.html");
+            location.replace("cardpage.html");
         }
         else{
             alert("There was an error adding your profile, please try again later.")
