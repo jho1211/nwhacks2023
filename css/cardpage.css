@@ -165,12 +165,10 @@ body {
 
 .topic-match {
     background: #9747FF;
-    /* Inside auto layout */
-    
 }
 
 .topic-nomatch {
-
+    background: gray;
 }
 
 .topic:hover {
@@ -194,4 +192,8 @@ body {
     flex: none;
     order: 0;
     flex-grow: 0;
+}
+
+.topic-text-nomatch {
+    color: white;
 }

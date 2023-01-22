@@ -31,15 +31,15 @@ async function fetch_pis(){
         body: JSON.stringify(data)})
     const piProfiles = await response.json();
 
-    for (var pip in piProfiles){
-        generate_profile_card(piProfiles[pip]);
+    for (var pip in piProfiles["pis"]){
+        generate_profile_card(piProfiles["pis"][pip], piProfiles["myTopics"]);
     }
 
     return;
 }
 
 // Generate a card based on the profile given and adds it to the cards container
-function generate_profile_card(profile){
+function generate_profile_card(profile, myTopics){
     var newDiv = document.createElement("div");
     newDiv.classList.add("card");
     topHalf = document.createElement("div");
@@ -51,19 +51,26 @@ function generate_profile_card(profile){
     
     topicContainer = document.createElement("div");
     topicContainer.classList.add("topic-container");
-    topicContainer = generate_topic_cards(topicContainer, profile["topics"]);
+    topicContainer = generate_topic_cards(topicContainer, profile["topics"], myTopics);
     
     newDiv.appendChild(topHalf);
     newDiv.appendChild(topicContainer);
     document.getElementById("cards").appendChild(newDiv);
 }
 
-function generate_topic_cards(tc, topics){
-    for (var i in topics){
+function generate_topic_cards(tc, piTopics, myTopics){
+    for (var i in piTopics){
         newTopicDiv = document.createElement("div")
         newTopicDiv.classList.add("topic");
-        newTopicDiv.classList.add("topic-match");
-        newTopicDiv.innerHTML = `<div class="topic-text">${topics[i]}</div></div>`
+
+        if (myTopics.includes(piTopics[i])){
+            newTopicDiv.classList.add("topic-match");
+            newTopicDiv.innerHTML = `<div class="topic-text">${piTopics[i]}</div></div>`
+        }
+        else{
+            newTopicDiv.classList.add("topic-nomatch");
+            newTopicDiv.innerHTML = `<div class="topic-text-nomatch">${piTopics[i]}</div></div>`
+        }
 
         tc.appendChild(newTopicDiv);
     }
