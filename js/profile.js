@@ -26,14 +26,17 @@ function auth_user(){
 async function submit_user(){
     uname = getCookie("username");
     profile = getCookie("hasProfile");
-    type = getCookie("userType");
+    type = document.getElementById("userType").value;
 
-    data = {"username": uname, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[3].value, "topics": $('#topics').val(), "extra": inputs[4].value}
+    inputs = document.querySelectorAll("input");
+    console.log(inputs);
+
+    data = {"username": uname, "userType": type, "name": inputs[0].value, "website": inputs[1].value, department: $('#department').val(), "email": inputs[2].value, "topics": $('#topics').val(), "extra": inputs[3].value}
     console.log(data);
 
-    if (uname !== "" && profile !== "" && type != ""){
+    if (uname !== "" && profile !== ""){
         // If the user exists already and has created a profile, then edit their entry in data.json
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit/" + type, {
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/edit/", {
         method: "POST",
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -42,18 +45,27 @@ async function submit_user(){
         // if response status is good, then set the cookie and redirect them to the search
         if (response.ok){
             setCookie(uname, "true", type)
+            location.replace("card.html");
         }
-
-        // if response status is bad, then alert
+        else{
+            alert("There was an error editing your profile, please try again later.")
+        }
     }
     else if (type !== ""){
-        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add/" + uname)
+        const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/add/", {
+        method: "POST",
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
 
         // if response status is good, then set the cookie and redirect them to the search
-
-        setCookie(uname, "true")
-
-        // if response status is bad, then alert
+        if (response.ok){
+            setCookie(uname, "true", type)
+            location.replace("card.html");
+        }
+        else{
+            alert("There was an error adding your profile, please try again later.")
+        }
     }
     else{
         alert("An unknown error occurred, please try again later.");
