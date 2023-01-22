@@ -1,5 +1,3 @@
-$(function () { $('#topics').select2() });
-
 async function auth_user(){
     page_title = document.getElementById("profileTitle")
     uname = getCookie("username");
@@ -24,6 +22,22 @@ async function auth_user(){
             
             const myProfile = await response.json();
             console.log(myProfile);
+
+            inputs = document.querySelectorAll("input");
+            inputs[0].value = myProfile["name"]
+            inputs[1].value = myProfile["website"]
+            inputs[2].value = myProfile["email"]
+            inputs[3].value = myProfile["extra"]
+
+            deptSelect = $("#department")
+            deptSelect[0].value = myProfile["department"];
+            await add_topic_options(myProfile["department"])
+            $("#topics").val(myProfile["topics"])
+
+            $('#topics').select2()
+
+            topicSelect = $("#topics")
+            console.log(topicSelect[0]);
 
             return;
         }
@@ -105,10 +119,17 @@ async function populate_select(dept){
     $('#topics').select2('destroy');
     clear_options();
 
-    topicSelect = $("#topics")[0];
+    await add_topic_options(dept)
+    
+    const converted = $('#topics').select2();
 
+    return;
+}
+
+async function add_topic_options(dept){
     const response = await fetch("data/departments.json");
     topics = await response.json();
+    topicSelect = $("#topics")[0];
 
     arr = []
 
@@ -120,8 +141,6 @@ async function populate_select(dept){
 
             topicSelect.add(newOption);
         }
-
-        const converted = $('#topics').select2();
     }
     else{
         console.log("There are no topics for this department.");
