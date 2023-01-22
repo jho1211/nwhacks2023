@@ -10,6 +10,10 @@ async function signup(){
         return false;
     }
 
+    if (!(email_input.value.endsWith("ubc.ca"))){
+        alert("Your email address is not valid, it must be UBC affiliated.")
+        return false;
+    }
 
     const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/signup", {
         method: "POST",

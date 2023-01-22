@@ -1,6 +1,7 @@
 function auth_user(){
     uname = getCookie("username");
     profile = getCookie("hasProfile");
+    userType = getCookie("userType");
 
     if (uname == ""){
         alert("You need to create a new account or sign-in before visiting this page.")
@@ -13,6 +14,10 @@ function auth_user(){
     }
     else{
         console.log("Welcome " + uname);
+        if (userType == "pi"){
+            alert("You don't belong here sir, please go back to your profile");
+            location.replace("profile.html");
+        }
         return;
     }
 }
