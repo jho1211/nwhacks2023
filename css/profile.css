@@ -2,14 +2,10 @@ body {
     background-color: #AB14C3;
     font-family: 'Open Sans', sans-serif;
     color: white;
+    flex-wrap: wrap;
 }
 
-.container{
-    display: flex;
-    flex-direction: row;
-}
-
-.login-panel {
+.profile-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,27 +13,27 @@ body {
     margin-bottom: 100px;
 }
 
-.login-item {
+.profile-item {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     width: 300px;
 }
 
-.login-input {
+.profile-input {
     width: 292px;
-    height: 40px;
+    height: 25px;
     font-size: 18px;
 }
 
-.login-item-text {
+.profile-item-text {
     color: white;
     font-size: 15px;
     font-weight: 30px;
     margin-bottom: 5px;
 }
 
-.login-btn {
+.upload-btn {
     width: 300px;
     height: 30px;
     color: #AB14C3;
