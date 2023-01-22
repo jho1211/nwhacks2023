@@ -17,7 +17,25 @@ function auth_user(){
     }
 }
 
+async function fetch_pis(){
+    // Assume that user already has profile
+    uname = getCookie("username");
+    userType = getCookie("userType");
+
+    data = {"username": uname, "userType": userType}
+
+    const response = await fetch("https://Undergrad-to-PI-Match-Service.jeffreyho3.repl.co/fetch/", {
+        method: "POST",
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+    const piProfiles = await response.json();
+
+    console.log(piProfiles);
+}
+
 auth_user();
+fetch_pis();
 
 document.getElementById("searchNavBtn").onclick = function () {
     location.href = "filter.html";
