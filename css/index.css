@@ -2,6 +2,7 @@ body{
     font-family: 'Open Sans', sans-serif;
     background-color: #AB14C3;
     color: white;
+    overflow: hidden;
 }
 
 .container{
@@ -10,8 +11,8 @@ body{
     align-items: center;
     justify-content: center;
 
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-top: 15%;
+    margin-bottom: 15%;
 }
 
 .cap{

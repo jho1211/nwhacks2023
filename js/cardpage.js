@@ -55,6 +55,13 @@ function generate_profile_card(profile, myTopics){
     
     newDiv.appendChild(topHalf);
     newDiv.appendChild(topicContainer);
+
+    // Implement the card expansion
+    newDiv.onclick = function (e) {
+        e.stopPropagation();
+        expand_card(profile);
+    }
+
     document.getElementById("cards").appendChild(newDiv);
 }
 
@@ -75,6 +82,53 @@ function generate_topic_cards(tc, piTopics, myTopics){
         tc.appendChild(newTopicDiv);
     }
     return tc;
+}
+
+function expand_card(profile){
+    console.log("Showing mega card");
+    // Hide all the cards
+    var cards = document.getElementById("cards")
+    cards.style.display = "none";
+
+    // Create a new div that takes up the page
+    var megaCardDiv = document.createElement("div");
+    megaCardDiv.classList.add("mega-cards-container");
+    megaCardDiv.id = "megaCardDiv"
+
+    var megaCard = document.createElement("div");
+    megaCard.classList.add("mega-card");
+
+    // generate megacard topics div and 
+    var firstRow = document.createElement("div");
+    firstRow.classList.add("mega-card-top-div");
+
+    firstRow.innerHTML = `
+    <div class="mega-card-bio-div"><div class="mega-card-bio-name">${profile["name"]}</div>
+    <div class="mega-card-bio-dept">Department: ${profile["department"]}</div></div>
+    
+    <div class="mega-card-link-div"><a class="mega-card-link" href=${profile["website"]}>Website</a>
+    <a class="mega-card-link" href="mailto:${profile["email"]}">Email</a></div>`
+
+    megaCard.appendChild(firstRow);
+    megaCardDiv.appendChild(megaCard);
+
+    document.body.appendChild(megaCardDiv);
+}
+
+function deflate_card(){
+    console.log("Deflating mega card");
+    var mcd = document.getElementById("megaCardDiv");
+
+    if (mcd !== null){
+        mcd.remove();
+    
+        var cards = document.getElementById("cards")
+        cards.style.display = "flex";
+
+        return;
+    }
+    
+    return;
 }
 
 auth_user();

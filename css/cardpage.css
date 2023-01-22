@@ -168,7 +168,7 @@ body {
 }
 
 .topic-nomatch {
-    background: gray;
+    background: white;
 }
 
 .topic:hover {
@@ -195,5 +195,80 @@ body {
 }
 
 .topic-text-nomatch {
+    color: #AB14C3;
+}
+
+.mega-cards-container {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 10px;
+    gap: 50px;
+    width: 1080px;
+
+    margin-top: 150px;
+
+}
+
+.mega-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    gap: 13px;
+
+    position: relative;
+    width: 1080px;
+
+    background: #E1B6E8;
+    border-radius: 20px;
+}
+
+.mega-card-top-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.mega-card-bio-div{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 540px;
+}
+
+.mega-card-bio-name{
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 30px;
+    margin: 5px 0px;
+}
+
+.mega-card-bio-dept{
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 5px 0px;
+}
+
+.mega-card-link-div{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    width: 120px;
+}
+
+.mega-card-link{
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 30px;
+    margin: 5px 0px;
+    text-decoration: none;
+
+    color: #AB14C3;
+}
+
+.mega-card-link:hover{
     color: white;
+    cursor: pointer;
 }
