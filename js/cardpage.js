@@ -59,7 +59,7 @@ function generate_profile_card(profile, myTopics){
     // Implement the card expansion
     newDiv.onclick = function (e) {
         e.stopPropagation();
-        expand_card(profile);
+        expand_card(profile, myTopics);
     }
 
     document.getElementById("cards").appendChild(newDiv);
@@ -84,7 +84,26 @@ function generate_topic_cards(tc, piTopics, myTopics){
     return tc;
 }
 
-function expand_card(profile){
+function generate_mega_topic_cards(tc, piTopics, myTopics){
+    for (var i in piTopics){
+        newTopicDiv = document.createElement("div")
+        newTopicDiv.classList.add("mega-topic");
+
+        if (myTopics.includes(piTopics[i])){
+            newTopicDiv.classList.add("topic-match");
+            newTopicDiv.innerHTML = `<div class="mega-topic-text">${piTopics[i]}</div></div>`
+        }
+        else{
+            newTopicDiv.classList.add("topic-nomatch");
+            newTopicDiv.innerHTML = `<div class="topic-text-nomatch">${piTopics[i]}</div></div>`
+        }
+
+        tc.appendChild(newTopicDiv);
+    }
+    return tc;
+}
+
+function expand_card(profile, myTopics){
     console.log("Showing mega card");
     // Hide all the cards
     var cards = document.getElementById("cards")
@@ -105,11 +124,22 @@ function expand_card(profile){
     firstRow.innerHTML = `
     <div class="mega-card-bio-div"><div class="mega-card-bio-name">${profile["name"]}</div>
     <div class="mega-card-bio-dept">Department: ${profile["department"]}</div></div>
-    
-    <div class="mega-card-link-div"><a class="mega-card-link" href=${profile["website"]}>Website</a>
+
+    <button class="close-mega-btn" onclick="deflate_card()">X</button>`
+
+    var topicRow = document.createElement("div");
+    topicRow.classList.add("mega-card-topic-div");
+    topicRow = generate_mega_topic_cards(topicRow, profile["topics"], myTopics)
+
+    var btmRight = document.createElement("div");
+    btmRight.classList.add("mega-btm-right-div");
+    btmRight.innerHTML = `<div class="mega-card-link-div">
+    <a class="mega-card-link" href=${profile["website"]}>Website</a>
     <a class="mega-card-link" href="mailto:${profile["email"]}">Email</a></div>`
 
     megaCard.appendChild(firstRow);
+    megaCard.appendChild(topicRow);
+    topicRow.appendChild(btmRight);
     megaCardDiv.appendChild(megaCard);
 
     document.body.appendChild(megaCardDiv);

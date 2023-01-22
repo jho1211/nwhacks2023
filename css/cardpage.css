@@ -212,6 +212,7 @@ body {
 }
 
 .mega-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 10px 10px;
@@ -233,21 +234,26 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 540px;
 }
 
 .mega-card-bio-name{
     font-size: 30px;
     font-weight: 700;
     line-height: 30px;
-    margin: 5px 0px;
+    margin: 5px 0px 5px 10px;
 }
 
 .mega-card-bio-dept{
     font-size: 30px;
     font-weight: 400;
     line-height: 30px;
-    margin: 5px 0px;
+    margin: 5px 0px 5px 10px;
+}
+
+.mega-btm-right-div{
+    position: absolute;
+    right: 0px;
+    bottom: 5px;
 }
 
 .mega-card-link-div{
@@ -255,7 +261,8 @@ body {
     flex-direction: column;
     text-align: right;
 
-    width: 120px;
+    margin-right: 15px;
+    height: 100px;
 }
 
 .mega-card-link{
@@ -271,4 +278,93 @@ body {
 .mega-card-link:hover{
     color: white;
     cursor: pointer;
+}
+
+.mega-card-topic-div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 50px;
+
+    width: 1000px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.mega-topic {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0px 15px 0px 10px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    border-radius: 20px;
+}
+
+.mega-topic-text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    
+    color: #EEEEEE;
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.mega-topic-text-nomatch {
+    color: #AB14C3;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.mega-topic:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.close-mega-btn{
+    width: 50px;
+    height: 50px;
+    margin-bottom: 25px;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background-color:rgba(255, 255, 255, 0);
+    border-color: #AB14C3;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.close-mega-btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.4);
 }
