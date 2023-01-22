@@ -2,32 +2,51 @@
 <html lang="en">
 <head>
     <title>My Profile</title>
-    <script src="js/profile.js"></script>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"/>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+    </script>
+
+    <script src="js/utils.js"></script>
 </head>
 <body>
+    <h1 class="profile-title" id="profileTitle">Create/Edit Profile</h1>
     <form>
         <div class="container">
             <div class="profile-panel">
-                <h1 class="login-title">Edit Profile</h1>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Name:</h3>
-                    <input type="name" id="name" class="profile-input">
+                    <input type="text" id="name" class="profile-input">
                 </div>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Department:</h3>
-                    <input type="department" id="department" class="profile-input">
+                    <select name="department" id="department" class="department-select">
+                        <option value="test">Test 1</option>
+                        <option value="test2">Test 2</option>
+                    </select>
                 </div>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Website:</h3>
-                    <input type="website", id="website" class="profile-input">
+                    <input type="url", id="website" class="profile-input">
                 </div>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Upload Photos</h3>
-                    <button type="button" class="upload-btn" id="upload-btn">Upload</button>
+                    <input type="file" accept=".jpg,.png" class="image-upload">
                 </div>
             </div>
             <div class="profile-panel">
@@ -37,14 +56,21 @@
                 </div>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Research Topics:</h3>
-                    <input type="research-topics", id="research-topics" class="profile-input">
+                    <select name="topics" id="topics" class="department-select" multiple>
+                        <option value="test">Test 1</option>
+                        <option value="test2">Test 2</option>
+                    </select>
                 </div>
                 <div class="profile-item">
                     <h3 class="profile-item-text">Additonal Information</h3>
-                    <input type="additional-info", id="additional-info" class="profile-input">
+                    <input type="text", id="additional-info" class="profile-input">
                 </div>
             </div>
         </div>
+        <div class="profile-panel">
+            <button type="submit" class="save-btn" id="saveBtn">Save Changes</button>
+        </div>
     </form>
+    <script src="js/profile.js"></script>
 </body>
 </html>
