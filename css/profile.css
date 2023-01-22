@@ -11,7 +11,7 @@ body {
     justify-content: center;
 
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 25px;
 }
 
 .profile-panel {
@@ -57,7 +57,12 @@ body {
     margin-top: 20px;
 }
 
-.login-title{
+.profile-title{
     font-size: 50px;
     text-align: center;
+}
+
+.save-btn {
+    width: 150px;
+    height: 30px;
 }
