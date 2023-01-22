@@ -4,18 +4,6 @@ body {
     color: white;
 }
 
-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .login-panel {
     display: flex;
     flex-direction: column;
